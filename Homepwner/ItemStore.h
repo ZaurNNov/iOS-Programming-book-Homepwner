@@ -17,5 +17,6 @@
 // Notice that this is a class method and prefixed with a + instead of a -
 +(instancetype)sharedStore;
 -(Item *)createItem;
+-(void)removeItem: (Item *)item;
 
 @end

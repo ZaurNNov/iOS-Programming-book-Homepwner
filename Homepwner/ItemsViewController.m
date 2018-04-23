@@ -37,9 +37,7 @@
 -(instancetype)init {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
-//        for (int i = 0; i < 10; i++) {
-//            [[ItemStore sharedStore] createItem];
-//        }
+
     }
     return self;
 }
@@ -65,6 +63,15 @@
     cell.textLabel.text = [item description];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSArray *items = [[ItemStore sharedStore] allItems];
+        Item *i = items[indexPath.row];
+        [[ItemStore sharedStore] removeItem:i];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 // Actions
