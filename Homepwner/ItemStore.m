@@ -53,4 +53,33 @@
     return item;
 }
 
+//Mid value = 50
+static int midValue = 50;
+
+-(NSArray *)returnItemsOfValue: (int)value overValue: (BOOL)over {
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    for (Item *i in _privateItems) {
+        if (over) {
+            if (i.valueInDollars > value) {
+                [array addObject:i];
+            }
+        } else {
+            if (i.valueInDollars <= value) {
+                [array addObject:i];
+            }
+        }
+    }
+    return array;
+}
+
+-(NSArray *)itemsMidMax {
+    return [self returnItemsOfValue:midValue overValue:YES];
+}
+
+-(NSArray *)itemsMinMid {
+    return [self returnItemsOfValue:midValue overValue:NO];
+}
+
+
+
 @end
