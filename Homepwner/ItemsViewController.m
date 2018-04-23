@@ -84,6 +84,10 @@
     [[ItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return @"No more items!";
+}
+
 // Actions
 -(IBAction)addNewItem:(id)sender {
     Item *new = [[ItemStore sharedStore] createItem];
