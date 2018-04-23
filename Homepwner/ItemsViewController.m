@@ -84,8 +84,28 @@
     [[ItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
 
--(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return @"No more items!";
+//-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+//    return @"No more items!";
+//}
+
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL isEditadle = YES;
+    NSUInteger count = [[[ItemStore sharedStore] allItems] count];
+    if (indexPath.row == count - 1) {
+        isEditadle = NO;
+    }
+    return isEditadle;
+}
+
+-(NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+    
+    NSArray *i = [[ItemStore sharedStore] allItems];
+    NSInteger max = i.count - 1;
+    
+    if (proposedDestinationIndexPath.row == max) {
+        return sourceIndexPath;
+    }
+    return proposedDestinationIndexPath;
 }
 
 // Actions

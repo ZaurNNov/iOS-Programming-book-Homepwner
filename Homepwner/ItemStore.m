@@ -38,6 +38,8 @@
     self = [super init];
     if (self) {
         _privateItems = [[NSMutableArray alloc] init];
+        // add a super last row - 'no more items!'
+        [self.privateItems addObject:@"No more items!"];
     }
     
     return self;
@@ -51,13 +53,19 @@
 
 -(Item *)createItem {
     Item *item = [Item randomItem];
-    [self.privateItems addObject:item];
+    // [self.privateItems addObject:item];
+    // @"No more items!" always last!
+    [self.privateItems insertObject:item atIndex:(self.privateItems.count - 1)];
     return item;
 }
 
 -(void)removeItem:(Item *)item {
     [self.privateItems removeObjectIdenticalTo:item];
 }
+
+//-(void)removeItem {
+//    [self.privateItems removeLastObject];
+//}
 
 -(void)moveItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
     if (fromIndex == toIndex) {
@@ -68,6 +76,5 @@
     [self.privateItems removeObjectAtIndex:fromIndex];
     [self.privateItems insertObject:i atIndex:toIndex];
 }
-
 
 @end
