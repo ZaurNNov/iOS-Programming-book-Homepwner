@@ -20,11 +20,17 @@
 
     // Designated initializer new - init:
 -(instancetype)init {
-    self = [super initWithStyle:UITableViewCellStyleValue1];
+    self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
         for (int i = 0; i < 10; i++) {
             [[ItemStore sharedStore] createItem];
         }
+        [self.tableView setRowHeight:60.0];
+        [self.tableView setSectionFooterHeight:44.0];
+        [self.tableView setSectionHeaderHeight:60.0];
+        self.tableView.backgroundColor = [UIColor lightTextColor];
+        UIImageView *backgroundImage = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"wooden"]];
+        self.tableView.backgroundView = backgroundImage;
     }
     return self;
 }
@@ -36,6 +42,11 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    // If no data
+    if ([[[ItemStore sharedStore] allItems] count] == 0) {
+        return 1; // No Items
+    }
     return 3;
 }
 
@@ -57,7 +68,7 @@
     switch (section) {
         case 0:
             return @"items from Mid <-> Max values";
-//            break;
+            break;
         case 1:
             return @"items from Min <-> Mid values";
             break;
@@ -74,6 +85,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+    cell.textLabel.font = [UIFont systemFontOfSize:20];
     
     // (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
     // 3 section
@@ -103,4 +115,9 @@
     return cell;
 }
 
+//// Custom sizes
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 44.0;
+//}
 @end
