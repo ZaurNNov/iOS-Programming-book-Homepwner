@@ -47,6 +47,8 @@
     return self.privateItems;
 }
 
+// CREATE DELETE MOOVE
+
 -(Item *)createItem {
     Item *item = [Item randomItem];
     [self.privateItems addObject:item];
@@ -56,5 +58,16 @@
 -(void)removeItem:(Item *)item {
     [self.privateItems removeObjectIdenticalTo:item];
 }
+
+-(void)moveItemAtIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+    if (fromIndex == toIndex) {
+        return;
+    }
+    
+    Item *i = self.privateItems[fromIndex];
+    [self.privateItems removeObjectAtIndex:fromIndex];
+    [self.privateItems insertObject:i atIndex:toIndex];
+}
+
 
 @end

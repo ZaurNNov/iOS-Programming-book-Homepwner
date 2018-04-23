@@ -74,6 +74,10 @@
     }
 }
 
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [[ItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
+}
+
 // Actions
 -(IBAction)addNewItem:(id)sender {
     Item *new = [[ItemStore sharedStore] createItem];
