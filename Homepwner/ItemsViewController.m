@@ -10,21 +10,36 @@
 #import "Item.h"
 #import "ItemStore.h"
 
+@interface ItemsViewController()
+
+@property (nonatomic, strong) IBOutlet UIView *headerView;
+
+@end
+
 @implementation ItemsViewController
+
+-(UIView *)headerView {
+    if (!_headerView) {
+        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
+    }
+    return _headerView;
+}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+    UIView *header = self.headerView;
+    [self.tableView setTableHeaderView:header];
 }
 
     // Designated initializer new - init:
 -(instancetype)init {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
-        for (int i = 0; i < 10; i++) {
-            [[ItemStore sharedStore] createItem];
-        }
+//        for (int i = 0; i < 10; i++) {
+//            [[ItemStore sharedStore] createItem];
+//        }
     }
     return self;
 }
@@ -52,6 +67,23 @@
     return cell;
 }
 
+// Actions
+-(IBAction)addNewItem:(id)sender {
+    Item *new = [[ItemStore sharedStore] createItem];
+    NSInteger lastRow = [[[ItemStore sharedStore] allItems] indexOfObject:new];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
 
+-(IBAction)toggleEditingMode:(id)sender {
+    if (self.isEditing) {
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        [self setEditing:NO animated:YES];
+    } else {
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        [self setEditing:YES animated:YES];
+    }
+}
 
 @end
