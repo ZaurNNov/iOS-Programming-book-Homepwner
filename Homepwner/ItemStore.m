@@ -7,6 +7,13 @@
 //
 
 #import "ItemStore.h"
+#import "Item.h"
+
+@interface ItemStore()
+
+@property (nonatomic) NSMutableArray *privateItems;
+
+@end
 
 @implementation ItemStore
 
@@ -29,7 +36,21 @@
     // it only for Supermen and Batman :)
 -(instancetype)initPrivate {
     self = [super init];
+    if (self) {
+        _privateItems = [[NSMutableArray alloc] init];
+    }
+    
     return self;
+}
+
+-(NSArray *)allItems {
+    return self.privateItems;
+}
+
+-(Item *)createItem {
+    Item *item = [Item randomItem];
+    [self.privateItems addObject:item];
+    return item;
 }
 
 @end
