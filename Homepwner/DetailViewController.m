@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "Item.h"
+#import "DatePickerViewController.h"
 
 @interface DetailViewController () <UITextFieldDelegate>
 
@@ -22,9 +23,18 @@
 
 // textField Delegate method
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (self.valueTextField == textField) {
-        
-    }
+
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (IBAction)changeDate:(UIButton *)sender {
+    DatePickerViewController *dpVC = [[DatePickerViewController alloc] init];
+    dpVC.item = self.item;
+    [self.navigationController pushViewController:dpVC animated:YES];
 }
 
 - (void)viewDidLoad {
