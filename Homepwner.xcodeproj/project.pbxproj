@@ -15,6 +15,8 @@
 		CE5C104B208A27A900592BB3 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C104A208A27A900592BB3 /* ItemsViewController.m */; };
 		CE5C104E208A2AEE00592BB3 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C104C208A2AEE00592BB3 /* Item.m */; };
 		CE5C1051208A2BB900592BB3 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C1050208A2BB900592BB3 /* ItemStore.m */; };
+		CEC430F7208F344500836895 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC430F5208F344400836895 /* DetailViewController.m */; };
+		CEC430F8208F344500836895 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC430F6208F344400836895 /* DetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,9 @@
 		CE5C104D208A2AEE00592BB3 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		CE5C104F208A2BB900592BB3 /* ItemStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemStore.h; sourceTree = "<group>"; };
 		CE5C1050208A2BB900592BB3 /* ItemStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemStore.m; sourceTree = "<group>"; };
+		CEC430F4208F344400836895 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		CEC430F5208F344400836895 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		CEC430F6208F344400836895 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +82,9 @@
 				CE5C104C208A2AEE00592BB3 /* Item.m */,
 				CE5C104F208A2BB900592BB3 /* ItemStore.h */,
 				CE5C1050208A2BB900592BB3 /* ItemStore.m */,
+				CEC430F4208F344400836895 /* DetailViewController.h */,
+				CEC430F5208F344400836895 /* DetailViewController.m */,
+				CEC430F6208F344400836895 /* DetailViewController.xib */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -141,6 +149,7 @@
 				CE5C103D208A21D600592BB3 /* Assets.xcassets in Resources */,
 				CE0C5DCD208E05F5008DC9C5 /* HeaderView.xib in Resources */,
 				CE5C1040208A21D600592BB3 /* LaunchScreen.storyboard in Resources */,
+				CEC430F8208F344500836895 /* DetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,6 +165,7 @@
 				CE5C1043208A21D600592BB3 /* main.m in Sources */,
 				CE5C103B208A21D400592BB3 /* AppDelegate.m in Sources */,
 				CE5C1051208A2BB900592BB3 /* ItemStore.m in Sources */,
+				CEC430F7208F344500836895 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
