@@ -16,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *valueTextField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
-@property (weak, nonatomic) NSDateFormatter *df;
-
 @end
 
 @implementation DetailViewController
@@ -33,7 +31,7 @@
     Item *i = self.item;
     self.nameTextField.text = i.itemName;
     self.serialTextField.text = i.serialNumber;
-    self.valueTextField.text = [NSString stringWithFormat:@"USA $: %d", i.valueInDollars];
+    self.valueTextField.text = [NSString stringWithFormat:@"%d", i.valueInDollars];
     
     // DateFarrmatter
     static NSDateFormatter *dateFormatter = nil;
@@ -44,6 +42,22 @@
     }
     // Use dateFormatter
     self.dateLabel.text = [dateFormatter stringFromDate:i.dateCreated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+    
+    // save
+    Item *i = self.item;
+    i.itemName = self.nameTextField.text;
+    i.serialNumber = self.serialTextField.text;
+    i.valueInDollars = [self.valueTextField.text intValue];
+}
+
+-(void)setItem:(Item *)item {
+    _item = item;
+    self.navigationItem.title = _item.itemName;
 }
 
 @end

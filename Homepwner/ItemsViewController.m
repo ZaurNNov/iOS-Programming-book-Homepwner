@@ -19,12 +19,12 @@
 
 @implementation ItemsViewController
 
--(UIView *)headerView {
-    if (!_headerView) {
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
-    }
-    return _headerView;
-}
+//-(UIView *)headerView {
+//    if (!_headerView) {
+//        [[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil];
+//    }
+//    return _headerView;
+//}
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -34,11 +34,20 @@
     [self.tableView setTableHeaderView:header];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
     // Designated initializer new - init:
 -(instancetype)init {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
-
+        UINavigationItem *naviItem = self.navigationItem;
+        naviItem.title = @"Homepwner";
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
+        naviItem.rightBarButtonItem = bbi;
+        naviItem.leftBarButtonItem = self.editButtonItem;
     }
     return self;
 }
@@ -91,6 +100,8 @@
 }
 
 
+
+
 // Actions
 -(IBAction)addNewItem:(id)sender {
     Item *new = [[ItemStore sharedStore] createItem];
@@ -100,14 +111,14 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
--(IBAction)toggleEditingMode:(id)sender {
-    if (self.isEditing) {
-        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-        [self setEditing:NO animated:YES];
-    } else {
-        [sender setTitle:@"Done" forState:UIControlStateNormal];
-        [self setEditing:YES animated:YES];
-    }
-}
+//-(IBAction)toggleEditingMode:(id)sender {
+//    if (self.isEditing) {
+//        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+//        [self setEditing:NO animated:YES];
+//    } else {
+//        [sender setTitle:@"Done" forState:UIControlStateNormal];
+//        [self setEditing:YES animated:YES];
+//    }
+//}
 
 @end
