@@ -9,6 +9,7 @@
 #import "ItemsViewController.h"
 #import "Item.h"
 #import "ItemStore.h"
+#import "DetailViewController.h"
 
 @interface ItemsViewController()
 
@@ -77,6 +78,18 @@
 -(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     [[ItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DetailViewController *dvc = [[DetailViewController alloc] init];
+    
+    // Data transfer
+    NSArray *items = [[ItemStore sharedStore] allItems];
+    Item *selected = items[indexPath.row];
+    dvc.item = selected;
+    
+    [self.navigationController pushViewController:dvc animated:YES];
+}
+
 
 // Actions
 -(IBAction)addNewItem:(id)sender {
