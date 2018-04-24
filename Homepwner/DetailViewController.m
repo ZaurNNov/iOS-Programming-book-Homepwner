@@ -9,7 +9,7 @@
 #import "DetailViewController.h"
 #import "Item.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *serialTextField;
@@ -20,10 +20,34 @@
 
 @implementation DetailViewController
 
--(void)viewDidLoad {
-
-    
+// textField Delegate method
+-(void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.valueTextField == textField) {
+        
+    }
 }
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    CGRect appRect = [[UIScreen mainScreen] bounds];
+    UIToolbar *accessoryView = [[UIToolbar alloc]
+                                initWithFrame:CGRectMake(0, 0, appRect.size.width, 0.1 * appRect.size.width)];
+    UIBarButtonItem *space = [[UIBarButtonItem alloc]
+                              initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                              target:nil
+                              action:nil];
+    UIBarButtonItem *done = [[UIBarButtonItem alloc]
+                             initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                             target:self
+                             action:@selector(selectDoneButton)];
+    accessoryView.items = @[space, done];
+    self.valueTextField.inputAccessoryView = accessoryView;
+}
+
+- (void)selectDoneButton {
+    [self.valueTextField resignFirstResponder];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
