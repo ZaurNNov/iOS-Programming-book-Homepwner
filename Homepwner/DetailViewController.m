@@ -26,6 +26,7 @@
 
 - (IBAction)takePicture:(UIBarButtonItem *)sender {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.allowsEditing = YES;
     // If has camera?
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -50,7 +51,7 @@
 
 // ImagePicker delegates
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    UIImage *image = info[UIImagePickerControllerEditedImage];
     
     [[ImageStore sharedStore] setImage:image forKey:self.item.imageKey];
     self.imageView.image = image;
