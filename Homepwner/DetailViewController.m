@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 - (IBAction)backgroundTapped:(id)sender;
+- (IBAction)clearImage:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIButton *clearImageButton;
 
 @end
 
@@ -43,6 +45,12 @@
     [self.view endEditing:YES];
 }
 
+- (IBAction)clearImage:(UIButton *)sender {
+    [[ImageStore sharedStore] deleteImageForKey:self.item.imageKey];
+    self.imageView.image = nil;
+    self.clearImageButton.alpha = 0.0;
+}
+
 // TextField delegates
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -55,11 +63,11 @@
     
     [[ImageStore sharedStore] setImage:image forKey:self.item.imageKey];
     self.imageView.image = image;
+    self.clearImageButton.alpha = 1.0;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)viewDidLoad {
-
     
 }
 
@@ -85,6 +93,8 @@
     NSString *imageKey = self.item.imageKey;
     UIImage *imageToDisplay = [[ImageStore sharedStore] imageForKey:imageKey];
     self.imageView.image = imageToDisplay;
+    
+    (self.imageView.image) ? (self.clearImageButton.alpha = 1.0) : (self.clearImageButton.alpha = 0.0);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -102,7 +112,5 @@
     _item = item;
     self.navigationItem.title = _item.itemName;
 }
-
-
 
 @end
