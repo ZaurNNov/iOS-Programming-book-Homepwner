@@ -67,6 +67,11 @@
         _valueInDollars = value;
         _serialNumber = serialNum;
         _dateCreated = [[NSDate alloc]init];
+        
+        // Create an NSUUID obj - it's key!
+        NSUUID *uuid = [[NSUUID alloc] init];
+        NSString *key = [uuid UUIDString];
+        _imageKey = key;
     }
     
     return self;

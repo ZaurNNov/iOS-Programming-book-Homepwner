@@ -8,17 +8,54 @@
 
 #import "DetailViewController.h"
 #import "Item.h"
+#import "ImageStore.h"
 
-@interface DetailViewController ()
+@interface DetailViewController () <UIImagePickerControllerDelegate , UINavigationControllerDelegate , UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *serialTextField;
 @property (weak, nonatomic) IBOutlet UITextField *valueTextField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+- (IBAction)backgroundTapped:(id)sender;
 
 @end
 
 @implementation DetailViewController
+
+- (IBAction)takePicture:(UIBarButtonItem *)sender {
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    // If has camera?
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else { // camera hasn't
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    
+    imagePicker.delegate = self;
+    // in screen
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+- (IBAction)backgroundTapped:(id)sender {
+    [self.view endEditing:YES];
+}
+
+// TextField delegates
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+// ImagePicker delegates
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    [[ImageStore sharedStore] setImage:image forKey:self.item.imageKey];
+    self.imageView.image = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 -(void)viewDidLoad {
 
@@ -42,6 +79,11 @@
     }
     // Use dateFormatter
     self.dateLabel.text = [dateFormatter stringFromDate:i.dateCreated];
+    
+    // Image Storage
+    NSString *imageKey = self.item.imageKey;
+    UIImage *imageToDisplay = [[ImageStore sharedStore] imageForKey:imageKey];
+    self.imageView.image = imageToDisplay;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -59,5 +101,7 @@
     _item = item;
     self.navigationItem.title = _item.itemName;
 }
+
+
 
 @end

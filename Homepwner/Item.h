@@ -28,6 +28,8 @@
 @property (nonatomic) int valueInDollars;
 @property (nonatomic, readonly, strong) NSDate *dateCreated;
 
+// for store Images
+@property (nonatomic, copy) NSString *imageKey;
 
 @end
 
