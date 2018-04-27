@@ -21,9 +21,12 @@
 +(instancetype)sharedStore {
     static ItemStore *sharedStore = nil;
     // Do I need to create a sharedStore?
-    if (!sharedStore) {
+    // Safe thread
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         sharedStore = [[self alloc] initPrivate];
-    }
+    });
+    
     return sharedStore;
 }
 

@@ -19,12 +19,11 @@
 
 // Singlton
 +(instancetype)sharedStore {
-    static ImageStore *sharedStore = nil;
-    
 //    if (!sharedStore) {
 //        sharedStore = [[self alloc] initPrivate];
 //    }
     
+    static ImageStore *sharedStore = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedStore = [[self alloc] initPrivate];
