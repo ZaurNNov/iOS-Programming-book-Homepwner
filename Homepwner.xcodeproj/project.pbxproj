@@ -14,6 +14,7 @@
 		CE5C104B208A27A900592BB3 /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C104A208A27A900592BB3 /* ItemsViewController.m */; };
 		CE5C104E208A2AEE00592BB3 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C104C208A2AEE00592BB3 /* Item.m */; };
 		CE5C1051208A2BB900592BB3 /* ItemStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C1050208A2BB900592BB3 /* ItemStore.m */; };
+		CEAC4ADA2093603C00AF7730 /* myPopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAC4AD92093603B00AF7730 /* myPopoverBackgroundView.m */; };
 		CEB34D032090616800BDE0D3 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB34D022090616800BDE0D3 /* ImageStore.m */; };
 		CEC430F7208F344500836895 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC430F5208F344400836895 /* DetailViewController.m */; };
 		CEC430F8208F344500836895 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC430F6208F344400836895 /* DetailViewController.xib */; };
@@ -33,6 +34,8 @@
 		CE5C104D208A2AEE00592BB3 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
 		CE5C104F208A2BB900592BB3 /* ItemStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemStore.h; sourceTree = "<group>"; };
 		CE5C1050208A2BB900592BB3 /* ItemStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemStore.m; sourceTree = "<group>"; };
+		CEAC4AD82093603B00AF7730 /* myPopoverBackgroundView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = myPopoverBackgroundView.h; sourceTree = "<group>"; };
+		CEAC4AD92093603B00AF7730 /* myPopoverBackgroundView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = myPopoverBackgroundView.m; sourceTree = "<group>"; };
 		CEB34D012090616800BDE0D3 /* ImageStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageStore.h; sourceTree = "<group>"; };
 		CEB34D022090616800BDE0D3 /* ImageStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageStore.m; sourceTree = "<group>"; };
 		CEC430F4208F344400836895 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -87,6 +90,8 @@
 				CEC430F6208F344400836895 /* DetailViewController.xib */,
 				CEB34D012090616800BDE0D3 /* ImageStore.h */,
 				CEB34D022090616800BDE0D3 /* ImageStore.m */,
+				CEAC4AD82093603B00AF7730 /* myPopoverBackgroundView.h */,
+				CEAC4AD92093603B00AF7730 /* myPopoverBackgroundView.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAC4ADA2093603C00AF7730 /* myPopoverBackgroundView.m in Sources */,
 				CE5C104E208A2AEE00592BB3 /* Item.m in Sources */,
 				CE5C104B208A27A900592BB3 /* ItemsViewController.m in Sources */,
 				CEB34D032090616800BDE0D3 /* ImageStore.m in Sources */,

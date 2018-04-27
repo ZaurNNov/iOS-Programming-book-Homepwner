@@ -10,8 +10,9 @@
 #import "Item.h"
 #import "ImageStore.h"
 #import "ItemStore.h"
+#import "myPopoverBackgroundView.h"
 
-@interface DetailViewController () <UIImagePickerControllerDelegate , UINavigationControllerDelegate , UITextFieldDelegate, UIPopoverControllerDelegate>
+@interface DetailViewController () <UIImagePickerControllerDelegate , UINavigationControllerDelegate , UITextFieldDelegate, UIPopoverPresentationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *serialTextField;
@@ -48,7 +49,9 @@
     // Check for iPad
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         // create a popover controller
+        // create myCustom popover
         self.imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+        self.imagePickerPopover.popoverBackgroundViewClass = [myPopoverBackgroundView class];
         self.imagePickerPopover.delegate = self;
         
         [self.imagePickerPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
