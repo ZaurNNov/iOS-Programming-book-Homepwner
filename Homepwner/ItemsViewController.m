@@ -89,7 +89,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    DetailViewController *dvc = [[DetailViewController alloc] init];
+    DetailViewController *dvc = [[DetailViewController alloc] initForNewItem:NO];
     
     // Data transfer
     NSArray *items = [[ItemStore sharedStore] allItems];
@@ -105,10 +105,22 @@
 // Actions
 -(IBAction)addNewItem:(id)sender {
     Item *new = [[ItemStore sharedStore] createItem];
-    NSInteger lastRow = [[[ItemStore sharedStore] allItems] indexOfObject:new];
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    // random Item
+//    NSInteger lastRow = [[[ItemStore sharedStore] allItems] indexOfObject:new];
+//
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:lastRow inSection:0];
+//    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    // self created item
+    DetailViewController *detailVC = [[DetailViewController alloc] initForNewItem:YES];
+    detailVC.item = new;
+    detailVC.dismissBlock = ^{
+        [self.tableView reloadData];
+    };
+    UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:detailVC];
+    nc.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:nc animated:YES completion:nil];
 }
 
 //-(IBAction)toggleEditingMode:(id)sender {

@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "Item.h"
 #import "ImageStore.h"
+#import "ItemStore.h"
 
 @interface DetailViewController () <UIImagePickerControllerDelegate , UINavigationControllerDelegate , UITextFieldDelegate, UIPopoverControllerDelegate>
 
@@ -21,6 +22,7 @@
 - (IBAction)backgroundTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 @property (strong, nonatomic) UIPopoverController *imagePickerPopover;
+
 
 @end
 
@@ -174,6 +176,38 @@
 -(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
     NSLog(@"User dismissed popover");
     self.imagePickerPopover = nil;
+}
+
+
+// Designated init
+-(instancetype)initForNewItem:(BOOL)isNew {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self) {
+        if (isNew) {
+            UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(save:)];
+            self.navigationItem.rightBarButtonItem = doneItem;
+            UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
+            self.navigationItem.leftBarButtonItem = cancelItem;
+        }
+    }
+    return self;
+}
+
+-(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    @throw [NSException exceptionWithName:@"Wrong init!" reason:@"Use initForNewItem:" userInfo:nil];
+    return nil;
+}
+
+-(void)save: (id)sender {
+//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+    
+}
+
+-(void)cancel: (id)sender {
+    [[ItemStore sharedStore] removeItem:self.item];
+//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
 @end
