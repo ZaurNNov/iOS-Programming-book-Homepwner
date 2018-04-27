@@ -10,7 +10,7 @@
 #import "Item.h"
 #import "ImageStore.h"
 
-@interface DetailViewController () <UIImagePickerControllerDelegate , UINavigationControllerDelegate , UITextFieldDelegate>
+@interface DetailViewController () <UIImagePickerControllerDelegate , UINavigationControllerDelegate , UITextFieldDelegate, UIPopoverControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *serialTextField;
@@ -19,12 +19,19 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 - (IBAction)backgroundTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
+@property (strong, nonatomic) UIPopoverController *imagePickerPopover;
 
 @end
 
 @implementation DetailViewController
 
 - (IBAction)takePicture:(UIBarButtonItem *)sender {
+    if ([self.imagePickerPopover isPopoverVisible]) {
+        [self.imagePickerPopover dismissPopoverAnimated:YES];
+        self.imagePickerPopover = nil;
+        return;
+    }
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     // If has camera?
     if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
@@ -35,7 +42,17 @@
     
     imagePicker.delegate = self;
     // in screen
-    [self presentViewController:imagePicker animated:YES completion:nil];
+//    [self presentViewController:imagePicker animated:YES completion:nil];
+    // Check for iPad
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        // create a popover controller
+        self.imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+        self.imagePickerPopover.delegate = self;
+        
+        [self.imagePickerPopover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
 }
 
 - (IBAction)backgroundTapped:(id)sender {
@@ -54,7 +71,16 @@
     
     [[ImageStore sharedStore] setImage:image forKey:self.item.imageKey];
     self.imageView.image = image;
-    [self dismissViewControllerAnimated:YES completion:nil];
+
+    // have popover?
+    if (self.imagePickerPopover) {
+        // dismiss it
+        [self.imagePickerPopover dismissPopoverAnimated:YES];
+        self.imagePickerPopover = nil;
+    } else {
+        // dismiss image picker
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 -(void)viewDidLoad {
@@ -84,6 +110,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    UIInterfaceOrientation io = [[UIApplication sharedApplication] statusBarOrientation];
+    [self prepareViewForOrientation:io];
     
     Item *i = self.item;
     self.nameTextField.text = i.itemName;
@@ -120,6 +149,31 @@
 -(void)setItem:(Item *)item {
     _item = item;
     self.navigationItem.title = _item.itemName;
+}
+
+-(void)prepareViewForOrientation: (UIInterfaceOrientation)orientation {
+    // its ipad?
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        return;
+    }
+    
+    // is it landscape?
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        self.imageView.hidden = YES;
+        self.cameraButton.enabled = NO;
+    } else {
+        self.imageView.hidden = NO;
+        self.cameraButton.enabled = YES;
+    }
+}
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self prepareViewForOrientation:toInterfaceOrientation];
+}
+
+-(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    NSLog(@"User dismissed popover");
+    self.imagePickerPopover = nil;
 }
 
 @end
