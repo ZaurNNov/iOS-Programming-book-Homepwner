@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63C1A6AD20A5AFAB003AF3B9 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A6AC20A5AFAB003AF3B9 /* ItemCell.m */; };
+		63C1A6AF20A5AFF1003AF3B9 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C1A6AE20A5AFF1003AF3B9 /* ItemCell.xib */; };
 		CE5C103B208A21D400592BB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C103A208A21D400592BB3 /* AppDelegate.m */; };
 		CE5C103D208A21D600592BB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5C103C208A21D600592BB3 /* Assets.xcassets */; };
 		CE5C1040208A21D600592BB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5C103E208A21D600592BB3 /* LaunchScreen.storyboard */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63C1A6AB20A5AFAB003AF3B9 /* ItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
+		63C1A6AC20A5AFAB003AF3B9 /* ItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
+		63C1A6AE20A5AFF1003AF3B9 /* ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
 		CE5C1036208A21D400592BB3 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5C1039208A21D400592BB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE5C103A208A21D400592BB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -87,6 +92,9 @@
 				CEC430F6208F344400836895 /* DetailViewController.xib */,
 				CEB34D012090616800BDE0D3 /* ImageStore.h */,
 				CEB34D022090616800BDE0D3 /* ImageStore.m */,
+				63C1A6AB20A5AFAB003AF3B9 /* ItemCell.h */,
+				63C1A6AC20A5AFAB003AF3B9 /* ItemCell.m */,
+				63C1A6AE20A5AFF1003AF3B9 /* ItemCell.xib */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -148,6 +156,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63C1A6AF20A5AFF1003AF3B9 /* ItemCell.xib in Resources */,
 				CE5C103D208A21D600592BB3 /* Assets.xcassets in Resources */,
 				CE5C1040208A21D600592BB3 /* LaunchScreen.storyboard in Resources */,
 				CEC430F8208F344500836895 /* DetailViewController.xib in Resources */,
@@ -165,6 +174,7 @@
 				CE5C104B208A27A900592BB3 /* ItemsViewController.m in Sources */,
 				CEB34D032090616800BDE0D3 /* ImageStore.m in Sources */,
 				CE5C1043208A21D600592BB3 /* main.m in Sources */,
+				63C1A6AD20A5AFAB003AF3B9 /* ItemCell.m in Sources */,
 				CE5C103B208A21D400592BB3 /* AppDelegate.m in Sources */,
 				CE5C1051208A2BB900592BB3 /* ItemStore.m in Sources */,
 				CEC430F7208F344500836895 /* DetailViewController.m in Sources */,

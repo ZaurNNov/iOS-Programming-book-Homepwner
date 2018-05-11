@@ -20,6 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     ItemsViewController *ivc = [[ItemsViewController alloc] init];
     
@@ -34,15 +35,35 @@
 }
 
 -(void)applicationDidEnterBackground:(UIApplication *)application {
-    NSLog(@"%@ - now in background", application.description);
-    [[ImageStore sharedStore] clearOurCache];
-    BOOL success = [[ItemStore sharedStore] saveChanges];
+    NSLog(@"%@", NSStringFromSelector(_cmd));
     
-    if (success) {
-        NSLog(@"Save my Items!");
-    } else {
+    NSUInteger items = [[[ItemStore sharedStore] allItems] count];
+    
+    if (items > 0) {
+        [[ImageStore sharedStore] clearOurCache];
+        BOOL success = [[ItemStore sharedStore] saveChanges];
+        if (success) {
+            NSLog(@"Save my Items!");
+        } else {
         NSLog(@"Not save any Items!");
+        }
     }
+}
+
+-(void)applicationWillEnterForeground:(UIApplication *)application {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+-(void)applicationDidBecomeActive:(UIApplication *)application {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+-(void)applicationWillResignActive:(UIApplication *)application {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
+}
+
+-(void)applicationWillTerminate:(UIApplication *)application {
+    NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "Item.h"
 #import "ItemStore.h"
 #import "DetailViewController.h"
+#import "ItemCell.h"
 
 @interface ItemsViewController()
 
@@ -29,7 +30,11 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
+    // Load xib
+    UINib *nib = [UINib nibWithNibName:@"ItemCell" bundle:nil];
+    // Register xib
+    [self.tableView registerNib:nib forCellReuseIdentifier:@"ItemCell"];
     UIView *header = self.headerView;
     [self.tableView setTableHeaderView:header];
 }
@@ -66,12 +71,19 @@
     // create default cell & cell ID
 //    UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     // get a new or recycled cell
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+
+    // get new recycled cell
+    ItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     
     NSArray *items = [[ItemStore sharedStore] allItems];
     Item *item = items[indexPath.row];
-    cell.textLabel.text = [item description];
-    
+//    cell.textLabel.text = [item description];
+    // configure cell
+    cell.nameLabel.text = item.itemName;
+    cell.serialNumber.text = item.serialNumber;
+    cell.valueLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
+
     return cell;
 }
 
