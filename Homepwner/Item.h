@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface Item : NSObject <NSCoding>
 
@@ -26,5 +27,8 @@
 
 // for store Images
 @property (nonatomic, copy) NSString *imageKey;
+@property (nonatomic, strong) UIImage *thumbnail;
+
+-(void)setThumbnailFromImage: (UIImage *)image;
 
 @end

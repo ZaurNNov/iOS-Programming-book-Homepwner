@@ -11,10 +11,13 @@
 #import "ItemStore.h"
 #import "DetailViewController.h"
 #import "ItemCell.h"
+#import "ImageStore.h"
+#import "ImageViewController.h"
 
-@interface ItemsViewController()
+@interface ItemsViewController() <UIPopoverControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIView *headerView;
+@property (nonatomic, strong) UIPopoverController *imagePopover;
 
 @end
 
@@ -42,6 +45,8 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+    
+    
 }
 
     // Designated initializer new - init:
@@ -75,16 +80,54 @@
 
     // get new recycled cell
     ItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
-    
     NSArray *items = [[ItemStore sharedStore] allItems];
     Item *item = items[indexPath.row];
-//    cell.textLabel.text = [item description];
+    
     // configure cell
     cell.nameLabel.text = item.itemName;
     cell.serialNumber.text = item.serialNumber;
     cell.valueLabel.text = [NSString stringWithFormat:@"$%d", item.valueInDollars];
+    cell.imageView.image = item.thumbnail;
+    
+    __weak ItemCell *weakCell = cell;
+    
+    cell.actionBlock = ^{
+        NSLog(@"Going to show image for %@", item);
+        ItemCell *strongCell = weakCell;
+        if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+            NSString *imageKey = item.imageKey;
+            UIImage *img = [[ImageStore sharedStore] imageForKey:imageKey];
+            if (!img) {
+                return;
+            }
+                // Make a rectangle for the frame of the thumbnail relative to
+                // our table view
+                // Note: there will be a warning on this line that we'll soon discuss
+            CGRect rect = [self.view convertRect:strongCell.thumbnailView.bounds
+                                        fromView:strongCell.thumbnailView];
+            
+                // Create a new BNRImageViewController and set its image
+            ImageViewController *ivc = [[ImageViewController alloc] init];
+            ivc.image = img;
+            
+                // Present a 600x600 popover from the rect
+            self.imagePopover = [[UIPopoverController alloc]
+                                 initWithContentViewController:ivc];
+            self.imagePopover.delegate = self;
+            self.imagePopover.popoverContentSize = CGSizeMake(600, 600);
+            [self.imagePopover presentPopoverFromRect:rect
+                                               inView:self.view
+                             permittedArrowDirections:UIPopoverArrowDirectionAny
+                                             animated:YES];
+        }
+    };
 
     return cell;
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    self.imagePopover = nil;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -111,9 +154,6 @@
     [self.navigationController pushViewController:dvc animated:YES];
 }
 
-
-
-
 // Actions
 -(IBAction)addNewItem:(id)sender {
     Item *new = [[ItemStore sharedStore] createItem];
@@ -134,15 +174,5 @@
     nc.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:nc animated:YES completion:nil];
 }
-
-//-(IBAction)toggleEditingMode:(id)sender {
-//    if (self.isEditing) {
-//        [sender setTitle:@"Edit" forState:UIControlStateNormal];
-//        [self setEditing:NO animated:YES];
-//    } else {
-//        [sender setTitle:@"Done" forState:UIControlStateNormal];
-//        [self setEditing:YES animated:YES];
-//    }
-//}
 
 @end

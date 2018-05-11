@@ -70,6 +70,7 @@
 // ImagePicker delegates
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     UIImage *image = info[UIImagePickerControllerOriginalImage];
+    [self.item setThumbnailFromImage:image];
     
     [[ImageStore sharedStore] setImage:image forKey:self.item.imageKey];
     self.imageView.image = image;

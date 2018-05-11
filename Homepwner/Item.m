@@ -89,6 +89,33 @@
     return descriptionString;
 }
 
+-(void)setThumbnailFromImage:(UIImage *)image {
+    CGSize originImageSize = image.size;
+    // rect for cell
+    CGRect newRect = CGRectMake(0, 0, 40, 40);
+    float ratio = MAX(newRect.size.width / originImageSize.width, newRect.size.height / originImageSize.height);
+    // create transparent bitmap
+    UIGraphicsBeginImageContextWithOptions(newRect.size, NO, 0.0);
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:newRect cornerRadius:5.0];
+    [path addClip];
+    
+    // Center the image
+    CGRect projectRect;
+    projectRect.size.width = ratio * originImageSize.width;
+    projectRect.size.height = ratio * originImageSize.height;
+    projectRect.origin.x = (newRect.size.width - projectRect.size.width) / 2.0;
+    projectRect.origin.y = (newRect.size.height - projectRect.size.height) / 2.0;
+    
+    // draw the image
+    [image drawInRect:projectRect];
+    
+    UIImage *smallImage = UIGraphicsGetImageFromCurrentImageContext();
+    self.thumbnail = smallImage;
+    
+    // clean
+    UIGraphicsEndImageContext();
+}
+
 // Dealloc
 -(void)dealloc {
 //    NSLog(@"<Dealloc *Item>");
@@ -107,6 +134,7 @@
     [aCoder encodeInt:self.valueInDollars forKey:@"valueInDollars"];
     [aCoder encodeObject:self.dateCreated forKey:@"dateCreated"];
     [aCoder encodeObject:self.imageKey forKey:@"imageKey"];
+    [aCoder encodeObject:self.thumbnail forKey:@"thumbnail"];
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -117,6 +145,7 @@
         _valueInDollars = [aDecoder decodeIntForKey:@"valueInDollars"];
         _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
         _imageKey = [aDecoder decodeObjectForKey:@"imageKey"];
+        _thumbnail = [aDecoder decodeObjectForKey:@"thumbnail"];
     }
     return self;
 }

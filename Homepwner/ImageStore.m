@@ -61,9 +61,9 @@
     // create path
     NSString *createdImagePath = [self imagePathForKey:key];
     // Turn image into PNG/JPEG data
-    NSData *imageDataPNG = UIImagePNGRepresentation(image);
+    NSData *imageDataJPEG = UIImageJPEGRepresentation(image, 0.5);
     // Write to disc
-    [imageDataPNG writeToFile:createdImagePath atomically:YES];
+    [imageDataJPEG writeToFile:createdImagePath atomically:YES];
     NSLog(@"Save image to: %@", createdImagePath);
     [self clearOurCache];
 }

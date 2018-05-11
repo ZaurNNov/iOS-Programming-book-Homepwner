@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		63C1A6AD20A5AFAB003AF3B9 /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A6AC20A5AFAB003AF3B9 /* ItemCell.m */; };
 		63C1A6AF20A5AFF1003AF3B9 /* ItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C1A6AE20A5AFF1003AF3B9 /* ItemCell.xib */; };
+		63C1A6B220A5E306003AF3B9 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A6B120A5E306003AF3B9 /* ImageViewController.m */; };
 		CE5C103B208A21D400592BB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C103A208A21D400592BB3 /* AppDelegate.m */; };
 		CE5C103D208A21D600592BB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE5C103C208A21D600592BB3 /* Assets.xcassets */; };
 		CE5C1040208A21D600592BB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5C103E208A21D600592BB3 /* LaunchScreen.storyboard */; };
@@ -25,6 +26,8 @@
 		63C1A6AB20A5AFAB003AF3B9 /* ItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
 		63C1A6AC20A5AFAB003AF3B9 /* ItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 		63C1A6AE20A5AFF1003AF3B9 /* ItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemCell.xib; sourceTree = "<group>"; };
+		63C1A6B020A5E306003AF3B9 /* ImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
+		63C1A6B120A5E306003AF3B9 /* ImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		CE5C1036208A21D400592BB3 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE5C1039208A21D400592BB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE5C103A208A21D400592BB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -95,6 +98,8 @@
 				63C1A6AB20A5AFAB003AF3B9 /* ItemCell.h */,
 				63C1A6AC20A5AFAB003AF3B9 /* ItemCell.m */,
 				63C1A6AE20A5AFF1003AF3B9 /* ItemCell.xib */,
+				63C1A6B020A5E306003AF3B9 /* ImageViewController.h */,
+				63C1A6B120A5E306003AF3B9 /* ImageViewController.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 				CE5C1043208A21D600592BB3 /* main.m in Sources */,
 				63C1A6AD20A5AFAB003AF3B9 /* ItemCell.m in Sources */,
 				CE5C103B208A21D400592BB3 /* AppDelegate.m in Sources */,
+				63C1A6B220A5E306003AF3B9 /* ImageViewController.m in Sources */,
 				CE5C1051208A2BB900592BB3 /* ItemStore.m in Sources */,
 				CEC430F7208F344500836895 /* DetailViewController.m in Sources */,
 			);
