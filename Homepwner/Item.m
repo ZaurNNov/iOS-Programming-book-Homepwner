@@ -20,26 +20,16 @@
     // Create an immutable array of three adjectives
     NSArray *randomAdjectiveList = @[@"Sunny", @"Purrpurr", @"SoftBoild"];
     
-        // Create an immutable array of three nouns
+    // Create an immutable array of three nouns
     NSArray *randomNounList = @[@"Smartphone", @"Monitor", @"Keyboard"];
     
-        // Get the index of a random adjective/noun from the lists
-        // Note: The % operator, called the modulo operator, gives
-        // you the remainder. So adjectiveIndex is a random number
-        // from 0 to 2 inclusive.
+    // Get the index of a random adjective/noun from the lists
+    // Note: The % operator, called the modulo operator, gives
+    // you the remainder. So adjectiveIndex is a random number
+    // from 0 to 2 inclusive.
     NSInteger adjectiveIndex = arc4random() % [randomAdjectiveList count];
     NSInteger nounIndex = arc4random() % [randomNounList count];
-    
-        // Note that NSInteger is not an object, but a type definition
-        // for "long"
-    
-    /* 2 - 5
-    NSString *randomName = [NSString stringWithFormat:@"%@ %@",
-                            [randomAdjectiveList objectAtIndex:adjectiveIndex],
-                            [randomNounList objectAtIndex:nounIndex]];
-     */
-    
-    // 2 - 6
+
     NSString *randomName = [NSString stringWithFormat:@"%@ %@", randomAdjectiveList[adjectiveIndex], randomNounList[nounIndex]];
     
     int randomValue = arc4random() % 100;
@@ -48,7 +38,7 @@
                                     '0' + arc4random() % 10,
                                     'A' + arc4random() % 26,
                                     '0' + arc4random() % 10,
-                                    'A' + arc4random() % 26,
+                                    'a' + arc4random() % 26,
                                     '0' + arc4random() % 10];
     
     
@@ -56,7 +46,6 @@
     return newItem;
 }
 
-// 3
 // Designated init
 -(instancetype)initWithItemName: (NSString *)name valueInDollars: (int)value serialNumber: (NSString *)serialNum {
     self = [super init];
@@ -73,25 +62,20 @@
         NSString *key = [uuid UUIDString];
         _imageKey = key;
     }
-    
     return self;
 }
 
-// 2
 -(instancetype)initWithItemName: (NSString *)name {
     return [self initWithItemName:name valueInDollars:0 serialNumber:@""];
 }
 
-// 1
 -(instancetype)init {
     return [self initWithItemName:@"Item"];
 }
 
-// Challenge init
 -(instancetype)initWithItemName:(NSString *)name serialNumber:(NSString *)serialNum {
     return [self initWithItemName:name valueInDollars:0 serialNumber:serialNum];
 }
-
 
 // Override Description
 -(NSString *)description {
@@ -107,8 +91,8 @@
 
 // Dealloc
 -(void)dealloc {
-    NSLog(@"<Dealloc *Item>");
-        //    NSLog(@"\n<Dealloc: %@ >", self.description);
+//    NSLog(@"<Dealloc *Item>");
+    NSLog(@"<Dealloc: %@>", self.description);
 }
 
 // accessors and properties
@@ -116,62 +100,27 @@
     _itemName = [itemName copy];
 }
 
-//-(void)setContainedItem:(Item *)containedItem {
-//    _containedItem = containedItem;
-//    self.containedItem.container = self;
-//}
+    // NSCoding:
+-(void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.itemName forKey:@"itemName"];
+    [aCoder encodeObject:self.serialNumber forKey:@"serialNumber"];
+    [aCoder encodeInt:self.valueInDollars forKey:@"valueInDollars"];
+    [aCoder encodeObject:self.dateCreated forKey:@"dateCreated"];
+    [aCoder encodeObject:self.imageKey forKey:@"imageKey"];
+}
 
-@end
+-(instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        _itemName = [aDecoder decodeObjectForKey:@"itemName"];
+        _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
+        _valueInDollars = [aDecoder decodeIntForKey:@"valueInDollars"];
+        _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
+        _imageKey = [aDecoder decodeObjectForKey:@"imageKey"];
+    }
+    return self;
+}
 
 ///////////////////////////////////////////////////
-/* 3 - 1
-//setters
--(void)setItemName:(NSString *)str {
-    _itemName = str;
-}
-
--(void)setSerialNumber:(NSString *)str {
-    _serialNumber = str;
-}
-
--(void)setValueInDollars:(int)v {
-    _valueInDollars = v;
-}
-
-// instances
--(NSString *)itemName {
-    return _itemName;
-}
-
--(NSString *)serialNumber {
-    return _serialNumber;
-}
-
--(int)valueInDollars {
-    return _valueInDollars;
-}
-
-- (NSDate *)dateCreated {
-    return  _dateCreated;
-}
-
-// 3-1
-- (void)setContainedItem: (Item *)item {
-    _containedItem = item;
-    item.container = self;
-}
-
-- (Item *)container {
-    return _container;
-}
-
-- (Item *)containedItem {
-    return _containedItem;
-}
-
-- (void)setContainer:(Item *)item {
-    _container = item;
-}
- 
- */
+@end
 

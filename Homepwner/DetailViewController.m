@@ -146,6 +146,8 @@
     i.itemName = self.nameTextField.text;
     i.serialNumber = self.serialTextField.text;
     i.valueInDollars = [self.valueTextField.text intValue];
+    // clear
+    [[ImageStore sharedStore] clearOurCache];
 }
 
 -(void)setItem:(Item *)item {

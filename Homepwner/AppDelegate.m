@@ -8,12 +8,15 @@
 
 #import "AppDelegate.h"
 #import "ItemsViewController.h"
+#import "ItemStore.h"
+#import "ImageStore.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -26,7 +29,20 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
     return YES;
+}
+
+-(void)applicationDidEnterBackground:(UIApplication *)application {
+    NSLog(@"%@ - now in background", application.description);
+    [[ImageStore sharedStore] clearOurCache];
+    BOOL success = [[ItemStore sharedStore] saveChanges];
+    
+    if (success) {
+        NSLog(@"Save my Items!");
+    } else {
+        NSLog(@"Not save any Items!");
+    }
 }
 
 @end
