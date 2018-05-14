@@ -23,10 +23,25 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 @property (strong, nonatomic) UIPopoverController *imagePickerPopover;
 
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *serialNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
 @end
 
 @implementation DetailViewController
+
+-(void)updateFonts {
+    UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    self.nameLabel.font = font;
+    self.serialNumberLabel.font = font;
+    self.valueLabel.font = font;
+    self.dateLabel.font = font;
+    
+    self.nameTextField.font = font;
+    self.serialTextField.font = font;
+    self.valueTextField.font = font;
+}
 
 - (IBAction)takePicture:(UIBarButtonItem *)sender {
     if ([self.imagePickerPopover isPopoverVisible]) {
@@ -136,6 +151,9 @@
     NSString *imageKey = self.item.imageKey;
     UIImage *imageToDisplay = [[ImageStore sharedStore] imageForKey:imageKey];
     self.imageView.image = imageToDisplay;
+    
+    // Font
+    [self updateFonts];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -192,8 +210,22 @@
             UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
             self.navigationItem.leftBarButtonItem = cancelItem;
         }
+        
+        // obserer for global fonts changes
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self
+                          selector:@selector(updateFonts)
+                              name:UIContentSizeCategoryDidChangeNotification
+                            object:nil];
     }
     return self;
+}
+
+-(void)dealloc {
+    // trust
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter removeObserver:self];
+    NSLog(@"DetailViewController %@", NSStringFromSelector(_cmd));
 }
 
 -(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {

@@ -44,9 +44,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.tableView reloadData];
-    
-    
+    [self updateTableViewForDynamicTypeSize]; //also tableView reload data
 }
 
     // Designated initializer new - init:
@@ -58,8 +56,22 @@
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
         naviItem.rightBarButtonItem = bbi;
         naviItem.leftBarButtonItem = self.editButtonItem;
+        
+        // observer font chages
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self
+                          selector:@selector(updateTableViewForDynamicTypeSize)
+                              name:UIContentSizeCategoryDidChangeNotification
+                            object:nil];
     }
     return self;
+}
+
+-(void)dealloc {
+    // trust
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self];
+    NSLog(@"ItemsViewController %@", NSStringFromSelector(_cmd));
 }
 
 #pragma MARK - UITableView Data & style
@@ -173,6 +185,26 @@
     UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:detailVC];
     nc.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentViewController:nc animated:YES completion:nil];
+}
+
+#pragma mark - Style
+-(void)updateTableViewForDynamicTypeSize {
+    static NSDictionary *cellHeightDictionary;
+    if (!cellHeightDictionary) {
+        cellHeightDictionary = @{
+                                 UIContentSizeCategoryExtraSmall: @44,
+                                 UIContentSizeCategorySmall     : @44,
+                                 UIContentSizeCategoryMedium    : @44,
+                                 UIContentSizeCategoryLarge     : @44,
+                                 UIContentSizeCategoryExtraLarge: @55,
+                                 UIContentSizeCategoryExtraExtraLarge: @65,
+                                 UIContentSizeCategoryExtraExtraExtraLarge: @75 };
+    }
+    
+    NSString *userSize = [[UIApplication sharedApplication] preferredContentSizeCategory];
+    NSNumber *cellHeight = cellHeightDictionary[userSize];
+    [self.tableView setRowHeight:cellHeight.floatValue];
+    [self.tableView reloadData];
 }
 
 @end
