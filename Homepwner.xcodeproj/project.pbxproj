@@ -20,6 +20,8 @@
 		CEB34D032090616800BDE0D3 /* ImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB34D022090616800BDE0D3 /* ImageStore.m */; };
 		CEC430F7208F344500836895 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC430F5208F344400836895 /* DetailViewController.m */; };
 		CEC430F8208F344500836895 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC430F6208F344400836895 /* DetailViewController.xib */; };
+		CEFEB74520AB11C2006AA6B3 /* Homepwner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEFEB74320AB11C2006AA6B3 /* Homepwner.xcdatamodeld */; };
+		CEFEB74820AB2B08006AA6B3 /* ImageTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFEB74720AB2B08006AA6B3 /* ImageTransformer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,9 @@
 		CEC430F4208F344400836895 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		CEC430F5208F344400836895 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		CEC430F6208F344400836895 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
+		CEFEB74420AB11C2006AA6B3 /* Homepwner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Homepwner.xcdatamodel; sourceTree = "<group>"; };
+		CEFEB74620AB2B08006AA6B3 /* ImageTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageTransformer.h; sourceTree = "<group>"; };
+		CEFEB74720AB2B08006AA6B3 /* ImageTransformer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageTransformer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +105,9 @@
 				63C1A6AE20A5AFF1003AF3B9 /* ItemCell.xib */,
 				63C1A6B020A5E306003AF3B9 /* ImageViewController.h */,
 				63C1A6B120A5E306003AF3B9 /* ImageViewController.m */,
+				CEFEB74320AB11C2006AA6B3 /* Homepwner.xcdatamodeld */,
+				CEFEB74620AB2B08006AA6B3 /* ImageTransformer.h */,
+				CEFEB74720AB2B08006AA6B3 /* ImageTransformer.m */,
 			);
 			path = Homepwner;
 			sourceTree = "<group>";
@@ -175,6 +183,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEFEB74820AB2B08006AA6B3 /* ImageTransformer.m in Sources */,
 				CE5C104E208A2AEE00592BB3 /* Item.m in Sources */,
 				CE5C104B208A27A900592BB3 /* ItemsViewController.m in Sources */,
 				CEB34D032090616800BDE0D3 /* ImageStore.m in Sources */,
@@ -184,6 +193,7 @@
 				63C1A6B220A5E306003AF3B9 /* ImageViewController.m in Sources */,
 				CE5C1051208A2BB900592BB3 /* ItemStore.m in Sources */,
 				CEC430F7208F344500836895 /* DetailViewController.m in Sources */,
+				CEFEB74520AB11C2006AA6B3 /* Homepwner.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +377,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CEFEB74320AB11C2006AA6B3 /* Homepwner.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CEFEB74420AB11C2006AA6B3 /* Homepwner.xcdatamodel */,
+			);
+			currentVersion = CEFEB74420AB11C2006AA6B3 /* Homepwner.xcdatamodel */;
+			path = Homepwner.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CE5C102E208A21D400592BB3 /* Project object */;
 }
